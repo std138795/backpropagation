@@ -1,4 +1,4 @@
-﻿using backprobagation;
+﻿using backpropagation;
 using System;
 namespace CodingBackProp
 {

@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using static backprobagation.neuron;
+using static backpropagation.neuron;
 
-namespace backprobagation
+namespace backpropagation
 {
     public class backp
     {
@@ -105,13 +105,13 @@ namespace backprobagation
     {
         public double learning_rate = 1;
         public List<neuron> neurons;
-        public nueron_type type;
+        public neuron.nueron_type type;
         public uint order;
         public layer(uint _order)
         {
             if (_order == 0)
             {
-                type = nueron_type.input;
+                type = neuron.nueron_type.input;
             }
             order = _order;
         }
@@ -143,15 +143,15 @@ namespace backprobagation
                 throw new Exception("Add layers");
             if (layers.Any(x => x.neurons == null || x.neurons.Count == 0))
                 throw new Exception("Add neurons to layers");
-            if (!layers.Any(x => x.type == nueron_type.output))
+            if (!layers.Any(x => x.type == neuron.nueron_type.output))
                 throw new Exception("Add output layer");
-            if (!layers.Any(x => x.type == nueron_type.input))
+            if (!layers.Any(x => x.type == neuron.nueron_type.input))
                 throw new Exception("Add input layer");
-            if (!layers.Any(x => x.type == nueron_type.hidden))
+            if (!layers.Any(x => x.type == neuron.nueron_type.hidden))
                 throw new Exception("Add hidden layer");
-            if (layers.Count(x => x.type == nueron_type.input) > 1)
+            if (layers.Count(x => x.type == neuron.nueron_type.input) > 1)
                 throw new Exception("Only one input layer is allowed");
-            if (layers.Count(x => x.type == nueron_type.output) > 1)
+            if (layers.Count(x => x.type == neuron.nueron_type.output) > 1)
                 throw new Exception("Only one input output is allowed");
             layers = layers.OrderBy(x => x.order).ToList();
             for (int i = 0; i < layers.Count; i++)
@@ -253,7 +253,7 @@ namespace backprobagation
         private void Forward(int train_row_index, int retrain)
         {
             #region input neuron
-            var inputlayer = layers.FirstOrDefault(x => x.type == nueron_type.input);
+            var inputlayer = layers.FirstOrDefault(x => x.type == neuron.nueron_type.input);
             for (int train_value_index = 0; train_value_index < traindata[train_row_index].input_values.Count; train_value_index++)//pare tis times kai baltes to proto layer se kathe neurona me th seira
             {
                 inputlayer.neurons[train_value_index].input_values = new List<double>();
@@ -280,7 +280,7 @@ namespace backprobagation
 
             #region layers for hidden neurons
 
-            var hiddenlayers = layers.Where(x => x.type != nueron_type.input).OrderBy(x => x.order).ToList();
+            var hiddenlayers = layers.Where(x => x.type != neuron.nueron_type.input).OrderBy(x => x.order).ToList();
 
 
             for (int hidden_layer_index = 0; hidden_layer_index < hiddenlayers.Count; hidden_layer_index++)//gia kathe layer
@@ -326,7 +326,7 @@ namespace backprobagation
             }
 
             //bres to output layer
-            var outneurons = layers.Where(x => x.type == nueron_type.output).OrderBy(x => x.order).FirstOrDefault().neurons;
+            var outneurons = layers.Where(x => x.type == neuron.nueron_type.output).OrderBy(x => x.order).FirstOrDefault().neurons;
             bool have_error = false;
             for (int neuron_index = 0; neuron_index < outneurons.Count; neuron_index++)
             {
@@ -359,7 +359,7 @@ namespace backprobagation
             if (have_error)
             {
                 //bres ta hidden layers
-                var hiddenlayers2 = layers.Where(x => x.type == nueron_type.hidden).OrderBy(x => x.order).ToList();
+                var hiddenlayers2 = layers.Where(x => x.type == neuron.nueron_type.hidden).OrderBy(x => x.order).ToList();
                 for (int layer_index = 0; layer_index < hiddenlayers2.Count; layer_index++)
                 {
                     for (int neuron_index = 0; neuron_index < hiddenlayers2[layer_index].neurons.Count; neuron_index++)

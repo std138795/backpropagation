@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backprobagation", "backprobagation.csproj", "{BC0C966A-34FB-4E4C-87B7-973ED2196AFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backpropagation", "backpropagation.csproj", "{BC0C966A-34FB-4E4C-87B7-973ED2196AFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
